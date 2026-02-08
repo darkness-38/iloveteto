@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>iloveteto.com - The Ultimate Kasane Teto Hub</title>
+    <title>I ♥ Teto</title>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
@@ -98,7 +98,11 @@
                 <h1 class="text-xl font-bold tracking-tight text-white group-hover:text-teto-accent transition-colors">
                     iloveteto.com</h1>
             </div>
-
+            <button onclick="toggleLanguage()" id="lang-toggle"
+                class="bg-white/10 hover:bg-white/20 text-white text-sm font-semibold py-2 px-3 rounded-lg transition-colors border border-white/5 flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px]">translate</span>
+                <span id="lang-text">TR</span>
+            </button>
         </header>
         <!-- Hero Section -->
         <main class="flex-grow flex flex-col items-center justify-center px-6 py-12 lg:py-20 max-w-7xl mx-auto w-full">
@@ -110,14 +114,13 @@
                 </div>
 
                 <h2 class="text-5xl lg:text-7xl font-black text-white tracking-tight mb-6 leading-tight relative z-10">
-                    Welcome to the <br />
-                    <span
-                        class="text-transparent bg-clip-text bg-gradient-to-r from-teto-accent to-pink-500 text-glow">Teto
+                    <span data-i18n="heroTitle">Welcome to the</span> <br />
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-teto-accent to-pink-500 text-glow">
                         Hub</span>
                 </h2>
-                <p class="text-gray-400 text-lg lg:text-xl max-w-2xl mx-auto leading-relaxed relative z-10">
-                    The ultimate collection of services. Build your profile, play games, and explore the
-                    archive.
+                <p class="text-gray-400 text-lg lg:text-xl max-w-2xl mx-auto leading-relaxed relative z-10"
+                    data-i18n="heroDesc">
+                    The ultimate collection of services. Build your profile, play games, and explore the archive.
                 </p>
             </div>
             <!-- Service Cards Grid -->
@@ -128,12 +131,12 @@
                         class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-purple-500/20">
                         <span class="material-symbols-outlined text-white">badge</span>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Cardly Profiles</h3>
-                    <p class="text-gray-400 text-sm mb-6 flex-grow">Create your ultimate Kasane Teto bio link with
-                        custom themes and layouts.</p>
+                    <h3 class="text-xl font-bold text-white mb-2" data-i18n="cardlyTitle">Cardly Profiles</h3>
+                    <p class="text-gray-400 text-sm mb-6 flex-grow" data-i18n="cardlyDesc">Create your ultimate bio link
+                        with custom themes and layouts.</p>
                     <a href="https://cardly.iloveteto.com"
                         class="w-full py-2.5 px-4 bg-charcoal hover:bg-teto-accent border border-white/10 hover:border-transparent rounded-lg text-white text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:shadow-teto-accent/25">
-                        <span>Create Profile</span>
+                        <span data-i18n="cardlyBtn">Create Profile</span>
                         <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                     </a>
                 </div>
@@ -143,12 +146,12 @@
                         class="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-pink-500/20">
                         <span class="material-symbols-outlined text-white">sports_esports</span>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Teto Arcade</h3>
-                    <p class="text-gray-400 text-sm mb-6 flex-grow">Play exclusive Teto-themed web games directly in
-                        your browser.</p>
+                    <h3 class="text-xl font-bold text-white mb-2" data-i18n="gamesTitle">Arcade</h3>
+                    <p class="text-gray-400 text-sm mb-6 flex-grow" data-i18n="gamesDesc">Play exclusive web games
+                        directly in your browser.</p>
                     <a href="https://games.iloveteto.com"
                         class="w-full py-2.5 px-4 bg-charcoal hover:bg-teto-accent border border-white/10 hover:border-transparent rounded-lg text-white text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:shadow-teto-accent/25">
-                        <span>Play Now</span>
+                        <span data-i18n="gamesBtn">Play Now</span>
                         <span class="material-symbols-outlined text-[16px]">play_arrow</span>
                     </a>
                 </div>
@@ -158,11 +161,12 @@
                         class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-blue-500/20">
                         <span class="material-symbols-outlined text-white">folder_open</span>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Media Archive</h3>
-                    <p class="text-gray-400 text-sm mb-6 flex-grow">A vast collection of music and media history.</p>
-                    <a href="https://media.iloveteto.com/invite"
+                    <h3 class="text-xl font-bold text-white mb-2" data-i18n="mediaTitle">Media Archive</h3>
+                    <p class="text-gray-400 text-sm mb-6 flex-grow" data-i18n="mediaDesc">A vast collection of music and
+                        media history.</p>
+                    <a href="http://media.iloveteto.com/invite"
                         class="w-full py-2.5 px-4 bg-charcoal hover:bg-teto-accent border border-white/10 hover:border-transparent rounded-lg text-white text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:shadow-teto-accent/25">
-                        <span>Kayıt Ol</span>
+                        <span data-i18n="mediaBtn">Register</span>
                         <span class="material-symbols-outlined text-[16px]">person_add</span>
                     </a>
                 </div>
@@ -172,27 +176,87 @@
                         class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-green-500/20">
                         <span class="material-symbols-outlined text-white">dns</span>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2">Minecraft SMP</h3>
-                    <p class="text-gray-400 text-sm mb-6 flex-grow">Join the survival server. Version 1.18.2+. Build
-                        your chimera legacy.</p>
+                    <h3 class="text-xl font-bold text-white mb-2" data-i18n="mcTitle">Minecraft SMP</h3>
+                    <p class="text-gray-400 text-sm mb-6 flex-grow" data-i18n="mcDesc">Join the survival server. Version
+                        1.18.2+. Build your legacy.</p>
                     <button onclick="copyIP()" id="copy-ip-btn"
                         class="w-full py-2.5 px-4 bg-charcoal hover:bg-teto-accent border border-white/10 hover:border-transparent rounded-lg text-white text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:shadow-teto-accent/25">
-                        <span id="copy-ip-text">IP Kopyala</span>
+                        <span id="copy-ip-text" data-i18n="mcBtn">Copy IP</span>
                         <span id="copy-ip-icon" class="material-symbols-outlined text-[16px]">content_copy</span>
                     </button>
                     <script>
+                        // Translation System
+                        const translations = {
+                            en: {
+                                heroTitle: "Welcome to the",
+                                heroDesc: "The ultimate collection of services. Build your profile, play games, and explore the archive.",
+                                cardlyTitle: "Cardly Profiles",
+                                cardlyDesc: "Create your ultimate bio link with custom themes and layouts.",
+                                cardlyBtn: "Create Profile",
+                                gamesTitle: "Arcade",
+                                gamesDesc: "Play exclusive web games directly in your browser.",
+                                gamesBtn: "Play Now",
+                                mediaTitle: "Media Archive",
+                                mediaDesc: "A vast collection of music, media, anime and more.",
+                                mediaBtn: "Register",
+                                mcTitle: "Minecraft SMP",
+                                mcDesc: "Join the survival server. Version 1.18.2+. Build your legacy.",
+                                mcBtn: "Copy IP",
+                                copied: "Copied!"
+                            },
+                            tr: {
+                                heroTitle: "Hoş Geldiniz",
+                                heroDesc: "En kapsamlı servis koleksiyonu. Profilinizi oluşturun, oyunlar oynayın ve arşivi keşfedin.",
+                                cardlyTitle: "Cardly Profiller",
+                                cardlyDesc: "Özel temalar ve düzenlerle kendinize bio link oluşturun.",
+                                cardlyBtn: "Profil Oluştur",
+                                gamesTitle: "Arcade",
+                                gamesDesc: "Tarayıcınızda özel web oyunları oynayın.",
+                                gamesBtn: "Oyna",
+                                mediaTitle: "Medya Arşivi",
+                                mediaDesc: "Geniş müzik, medya ve anime koleksiyonu.",
+                                mediaBtn: "Kayıt Ol",
+                                mcTitle: "Minecraft SMP",
+                                mcDesc: "Survival sunucusuna katılın. Sürüm 1.18.2+. Mirasınızı inşa edin.",
+                                mcBtn: "IP Kopyala",
+                                copied: "Kopyalandı!"
+                            }
+                        };
+
+                        let currentLang = localStorage.getItem('lang') || 'en';
+
+                        function toggleLanguage() {
+                            currentLang = currentLang === 'en' ? 'tr' : 'en';
+                            localStorage.setItem('lang', currentLang);
+                            applyTranslations();
+                        }
+
+                        function applyTranslations() {
+                            document.querySelectorAll('[data-i18n]').forEach(el => {
+                                const key = el.dataset.i18n;
+                                if (translations[currentLang][key]) {
+                                    el.textContent = translations[currentLang][key];
+                                }
+                            });
+                            document.getElementById('lang-text').textContent = currentLang === 'en' ? 'TR' : 'EN';
+                            document.documentElement.lang = currentLang;
+                        }
+
+                        // Apply on page load
+                        document.addEventListener('DOMContentLoaded', applyTranslations);
+
+                        // Copy IP Function
                         function copyIP() {
                             const ip = "play.iloveteto.com";
                             navigator.clipboard.writeText(ip).then(() => {
                                 const textEl = document.getElementById('copy-ip-text');
                                 const iconEl = document.getElementById('copy-ip-icon');
-                                const originalText = textEl.innerText;
-                                const originalIcon = iconEl.innerText;
-                                textEl.innerText = 'Kopyalandı!';
+                                const originalText = translations[currentLang].mcBtn;
+                                textEl.innerText = translations[currentLang].copied;
                                 iconEl.innerText = 'check';
                                 setTimeout(() => {
                                     textEl.innerText = originalText;
-                                    iconEl.innerText = originalIcon;
+                                    iconEl.innerText = 'content_copy';
                                 }, 2000);
                             });
                         }
