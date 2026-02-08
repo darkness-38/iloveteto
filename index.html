@@ -114,9 +114,9 @@
                 </div>
 
                 <h2 class="text-5xl lg:text-7xl font-black text-white tracking-tight mb-6 leading-tight relative z-10">
-                    <span data-i18n="heroTitle">Welcome to the</span> <br />
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-teto-accent to-pink-500 text-glow">
-                        Hub</span>
+                    <span data-i18n="heroTitle">Welcome to the </span><br />
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-teto-accent to-pink-500 text-glow"
+                        data-i18n="heroHub">Hub</span>
                 </h2>
                 <p class="text-gray-400 text-lg lg:text-xl max-w-2xl mx-auto leading-relaxed relative z-10"
                     data-i18n="heroDesc">
@@ -164,7 +164,7 @@
                     <h3 class="text-xl font-bold text-white mb-2" data-i18n="mediaTitle">Media Archive</h3>
                     <p class="text-gray-400 text-sm mb-6 flex-grow" data-i18n="mediaDesc">A vast collection of music and
                         media history.</p>
-                    <a href="http://media.iloveteto.com/invite"
+                    <a href="https://media.iloveteto.com/invite"
                         class="w-full py-2.5 px-4 bg-charcoal hover:bg-teto-accent border border-white/10 hover:border-transparent rounded-lg text-white text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:shadow-teto-accent/25">
                         <span data-i18n="mediaBtn">Register</span>
                         <span class="material-symbols-outlined text-[16px]">person_add</span>
@@ -188,7 +188,8 @@
                         // Translation System
                         const translations = {
                             en: {
-                                heroTitle: "Welcome to the",
+                                heroHub: "Hub",
+                                heroTitle: "Welcome to the ",
                                 heroDesc: "The ultimate collection of services. Build your profile, play games, and explore the archive.",
                                 cardlyTitle: "Cardly Profiles",
                                 cardlyDesc: "Create your ultimate bio link with custom themes and layouts.",
@@ -205,6 +206,7 @@
                                 copied: "Copied!"
                             },
                             tr: {
+                                heroHub: "Hub'a",
                                 heroTitle: "Hoş Geldiniz",
                                 heroDesc: "En kapsamlı servis koleksiyonu. Profilinizi oluşturun, oyunlar oynayın ve arşivi keşfedin.",
                                 cardlyTitle: "Cardly Profiller",
@@ -238,6 +240,32 @@
                                     el.textContent = translations[currentLang][key];
                                 }
                             });
+
+                            // Handle hero title order for Turkish
+                            const heroTitle = document.querySelector('[data-i18n="heroTitle"]');
+                            const heroHub = document.querySelector('[data-i18n="heroHub"]');
+                            const h2 = heroTitle.parentElement;
+                            const br = h2.querySelector('br');
+
+                            if (currentLang === 'tr') {
+                                // Turkish: Hub'a Hoş Geldiniz (Hub first)
+                                h2.innerHTML = '';
+                                h2.appendChild(heroHub);
+                                h2.appendChild(document.createTextNode(' '));
+                                h2.appendChild(heroTitle);
+                            } else {
+                                // English: Welcome to the Hub (Title first)
+                                h2.innerHTML = '';
+                                h2.appendChild(heroTitle);
+                                h2.appendChild(br || document.createElement('br'));
+                                h2.appendChild(heroHub);
+                            }
+
+                            // Re-apply translations after DOM change
+                            heroTitle.textContent = translations[currentLang].heroTitle;
+                            heroHub.textContent = translations[currentLang].heroHub;
+                            heroHub.className = 'text-transparent bg-clip-text bg-gradient-to-r from-teto-accent to-pink-500 text-glow';
+
                             document.getElementById('lang-text').textContent = currentLang === 'en' ? 'TR' : 'EN';
                             document.documentElement.lang = currentLang;
                         }
