@@ -98,19 +98,7 @@
                 <h1 class="text-xl font-bold tracking-tight text-white group-hover:text-teto-accent transition-colors">
                     iloveteto.com</h1>
             </div>
-            <nav class="hidden md:flex gap-8 items-center">
-                <a class="text-sm font-medium text-gray-400 hover:text-white transition-colors" href="#">Services</a>
-                <a class="text-sm font-medium text-gray-400 hover:text-white transition-colors" href="#">About</a>
-                <a class="text-sm font-medium text-gray-400 hover:text-white transition-colors" href="#">Community</a>
-                <button
-                    class="bg-white/10 hover:bg-white/20 text-white text-sm font-semibold py-2 px-4 rounded-lg transition-colors border border-white/5">
-                    Login
-                </button>
-            </nav>
-            <!-- Mobile Menu Icon -->
-            <button class="md:hidden text-white">
-                <span class="material-symbols-outlined">menu</span>
-            </button>
+
         </header>
         <!-- Hero Section -->
         <main class="flex-grow flex flex-col items-center justify-center px-6 py-12 lg:py-20 max-w-7xl mx-auto w-full">
@@ -120,11 +108,7 @@
                     class="absolute -top-20 -right-20 lg:-right-40 text-[120px] lg:text-[200px] font-black text-white/[0.03] select-none pointer-events-none leading-none z-0">
                     04
                 </div>
-                <div
-                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teto-accent/10 border border-teto-accent/20 text-teto-accent text-xs font-bold uppercase tracking-wider mb-6 relative z-10">
-                    <span class="w-2 h-2 rounded-full bg-teto-accent animate-pulse"></span>
-                    Project Chimera
-                </div>
+
                 <h2 class="text-5xl lg:text-7xl font-black text-white tracking-tight mb-6 leading-tight relative z-10">
                     Welcome to the <br />
                     <span
@@ -132,7 +116,7 @@
                         Hub</span>
                 </h2>
                 <p class="text-gray-400 text-lg lg:text-xl max-w-2xl mx-auto leading-relaxed relative z-10">
-                    The ultimate collection of Kasane Teto services. Build your profile, play games, and explore the
+                    The ultimate collection of services. Build your profile, play games, and explore the
                     archive.
                 </p>
             </div>
@@ -147,11 +131,11 @@
                     <h3 class="text-xl font-bold text-white mb-2">Cardly Profiles</h3>
                     <p class="text-gray-400 text-sm mb-6 flex-grow">Create your ultimate Kasane Teto bio link with
                         custom themes and layouts.</p>
-                    <button
+                    <a href="https://cardly.iloveteto.com"
                         class="w-full py-2.5 px-4 bg-charcoal hover:bg-teto-accent border border-white/10 hover:border-transparent rounded-lg text-white text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:shadow-teto-accent/25">
                         <span>Create Profile</span>
                         <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-                    </button>
+                    </a>
                 </div>
                 <!-- Card 2: Games -->
                 <div class="glass-card rounded-2xl p-6 flex flex-col group h-full">
@@ -162,11 +146,11 @@
                     <h3 class="text-xl font-bold text-white mb-2">Teto Arcade</h3>
                     <p class="text-gray-400 text-sm mb-6 flex-grow">Play exclusive Teto-themed web games directly in
                         your browser.</p>
-                    <button
+                    <a href="https://games.iloveteto.com"
                         class="w-full py-2.5 px-4 bg-charcoal hover:bg-teto-accent border border-white/10 hover:border-transparent rounded-lg text-white text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:shadow-teto-accent/25">
                         <span>Play Now</span>
                         <span class="material-symbols-outlined text-[16px]">play_arrow</span>
-                    </button>
+                    </a>
                 </div>
                 <!-- Card 3: Media Archive -->
                 <div class="glass-card rounded-2xl p-6 flex flex-col group h-full relative overflow-hidden">
@@ -175,15 +159,12 @@
                         <span class="material-symbols-outlined text-white">folder_open</span>
                     </div>
                     <h3 class="text-xl font-bold text-white mb-2">Media Archive</h3>
-                    <p class="text-gray-400 text-sm mb-2 flex-grow">A vast collection of music and media history.</p>
-                    <p class="text-xs text-teto-accent/80 font-medium mb-4 italic flex items-center gap-1">
-                        <span class="material-symbols-outlined text-[12px]">lock</span> Invite link required
-                    </p>
-                    <button
+                    <p class="text-gray-400 text-sm mb-6 flex-grow">A vast collection of music and media history.</p>
+                    <a href="https://media.iloveteto.com/invite"
                         class="w-full py-2.5 px-4 bg-charcoal hover:bg-teto-accent border border-white/10 hover:border-transparent rounded-lg text-white text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:shadow-teto-accent/25">
-                        <span>Request Access</span>
-                        <span class="material-symbols-outlined text-[16px]">key</span>
-                    </button>
+                        <span>Kayıt Ol</span>
+                        <span class="material-symbols-outlined text-[16px]">person_add</span>
+                    </a>
                 </div>
                 <!-- Card 4: Minecraft SMP -->
                 <div class="glass-card rounded-2xl p-6 flex flex-col group h-full">
@@ -194,11 +175,28 @@
                     <h3 class="text-xl font-bold text-white mb-2">Minecraft SMP</h3>
                     <p class="text-gray-400 text-sm mb-6 flex-grow">Join the survival server. Version 1.18.2+. Build
                         your chimera legacy.</p>
-                    <button
+                    <button onclick="copyIP()" id="copy-ip-btn"
                         class="w-full py-2.5 px-4 bg-charcoal hover:bg-teto-accent border border-white/10 hover:border-transparent rounded-lg text-white text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:shadow-teto-accent/25">
-                        <span>Copy IP Address</span>
-                        <span class="material-symbols-outlined text-[16px]">content_copy</span>
+                        <span id="copy-ip-text">IP Kopyala</span>
+                        <span id="copy-ip-icon" class="material-symbols-outlined text-[16px]">content_copy</span>
                     </button>
+                    <script>
+                        function copyIP() {
+                            const ip = "play.iloveteto.com";
+                            navigator.clipboard.writeText(ip).then(() => {
+                                const textEl = document.getElementById('copy-ip-text');
+                                const iconEl = document.getElementById('copy-ip-icon');
+                                const originalText = textEl.innerText;
+                                const originalIcon = iconEl.innerText;
+                                textEl.innerText = 'Kopyalandı!';
+                                iconEl.innerText = 'check';
+                                setTimeout(() => {
+                                    textEl.innerText = originalText;
+                                    iconEl.innerText = originalIcon;
+                                }, 2000);
+                            });
+                        }
+                    </script>
                 </div>
             </div>
         </main>
@@ -209,35 +207,15 @@
                     <div class="flex items-center gap-2 text-white/80">
                         <span class="text-sm font-bold">iloveteto.com</span>
                         <span class="text-xs text-gray-500">•</span>
-                        <span class="text-xs text-gray-500">Est. 2023</span>
+                        <span class="text-xs text-gray-500">Est. 2026</span>
                     </div>
-                    <p class="text-xs text-gray-500">Kasane Teto is a UTAU voice synthesizer library.</p>
                 </div>
-                <div class="flex gap-6">
-                    <a class="text-gray-400 hover:text-teto-accent transition-colors" href="#">
-                        <span class="sr-only">Twitter</span>
-                        <!-- Custom SVG for Twitter/X as it's not in Material Symbols -->
-                        <svg class="h-5 w-5 fill-current" viewbox="0 0 24 24">
-                            <path
-                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
-                            </path>
-                        </svg>
-                    </a>
-                    <a class="text-gray-400 hover:text-teto-accent transition-colors" href="#">
-                        <span class="sr-only">Discord</span>
-                        <!-- Custom SVG for Discord -->
-                        <svg class="h-5 w-5 fill-current" viewbox="0 0 24 24">
-                            <path
-                                d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z">
-                            </path>
-                        </svg>
-                    </a>
-                </div>
-                <div class="flex gap-4 text-xs font-medium text-gray-500">
-                    <a class="hover:text-white transition-colors" href="#">Privacy</a>
-                    <a class="hover:text-white transition-colors" href="#">Terms</a>
-                    <a class="hover:text-white transition-colors" href="#">Contact</a>
-                </div>
+                <a href="mailto:support@iloveteto.com"
+                    class="text-gray-400 hover:text-teto-accent transition-colors text-sm flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[18px]">mail</span>
+                    support@iloveteto.com
+                </a>
+
             </div>
         </footer>
     </div>
