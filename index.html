@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html class="dark" lang="en">
 
 <head>
@@ -7,320 +6,978 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>I ♥ Teto</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#FF004F", // Overriding with Teto Red as requested
-                        "primary-dark": "#D60042",
-                        "background-light": "#f8f6f6",
-                        "background-dark": "#121214",
-                        "charcoal": "#1E1E24",
-                        "teto-accent": "#FF004F",
-                    },
-                    fontFamily: {
-                        "display": ["Spline Sans", "sans-serif"],
-                        "body": ["Spline Sans", "sans-serif"],
-                    },
-                    backgroundImage: {
-                        'grid-pattern': "linear-gradient(to right, #2a2a2a 1px, transparent 1px), linear-gradient(to bottom, #2a2a2a 1px, transparent 1px)",
-                    }
-                },
-            },
-        }
-    </script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID"
+        crossorigin="anonymous"></script>
+
     <style>
-        /* Custom Styles for specific effects not easily achievable with just utility classes */
-        .glass-card {
-            background: rgba(30, 30, 36, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .glass-card:hover {
-            transform: translateY(-5px);
-            border-color: #FF004F;
-            box-shadow: 0 10px 40px -10px rgba(255, 0, 79, 0.3);
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: rgba(20, 20, 30, 0.6);
+            --accent-primary: #ff2d75;
+            --accent-secondary: #7b2cff;
+            --accent-tertiary: #00d4ff;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.6);
+            --text-muted: rgba(255, 255, 255, 0.4);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --glow-pink: rgba(255, 45, 117, 0.4);
+            --glow-purple: rgba(123, 44, 255, 0.4);
         }
 
-        .bg-grid {
-            background-size: 40px 40px;
-            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        .teto-glow {
-            background: radial-gradient(circle at 50% 50%, rgba(255, 0, 79, 0.15), transparent 60%);
+        /* Animated Background */
+        .bg-gradient-animate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
         }
 
-        .text-glow {
-            text-shadow: 0 0 20px rgba(255, 0, 79, 0.5);
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            top: -200px;
+            right: -150px;
+            opacity: 0.3;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, var(--accent-secondary), var(--accent-tertiary));
+            bottom: -200px;
+            left: -150px;
+            opacity: 0.25;
+            animation-delay: -7s;
+        }
+
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.15;
+            animation-delay: -14s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            25% {
+                transform: translate(30px, -30px) scale(1.05);
+            }
+
+            50% {
+                transform: translate(-20px, 20px) scale(0.95);
+            }
+
+            75% {
+                transform: translate(20px, 30px) scale(1.02);
+            }
+        }
+
+        /* Grid Pattern */
+        .grid-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 1;
+            pointer-events: none;
+            mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+        }
+
+        /* Particles */
+        .particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particle-float 15s ease-in-out infinite;
+        }
+
+        @keyframes particle-float {
+
+            0%,
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) scale(0);
+            }
+
+            10% {
+                opacity: 0.6;
+            }
+
+            90% {
+                opacity: 0.6;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(1);
+            }
+        }
+
+        /* Main Container */
+        .main-container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px var(--glow-pink);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.1),
+                    transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%) rotate(45deg);
+            }
+
+            100% {
+                transform: translateX(100%) rotate(45deg);
+            }
+        }
+
+        .logo-icon .material-symbols-outlined {
+            font-size: 24px;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--text-primary), var(--accent-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .lang-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .lang-toggle:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-primary);
+            color: var(--text-primary);
+        }
+
+        .lang-toggle .material-symbols-outlined {
+            font-size: 18px;
+        }
+
+        /* Hero Section */
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-content {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, rgba(255, 45, 117, 0.1), rgba(123, 44, 255, 0.1));
+            border: 1px solid rgba(255, 45, 117, 0.3);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--accent-primary);
+            margin-bottom: 1.5rem;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(255, 45, 117, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 0 30px rgba(255, 45, 117, 0.4);
+            }
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-title .highlight {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+            animation: gradient-shift 5s ease infinite;
+            text-shadow: none;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-title .highlight::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: blur(30px);
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        @keyframes gradient-shift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Ad Container */
+        .ad-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .ad-placeholder {
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .ad-placeholder .material-symbols-outlined {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+            opacity: 0.5;
+        }
+
+        /* Bento Grid */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1024px) {
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.02));
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-primary);
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 60px var(--glow-pink);
+        }
+
+        .card-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .card:hover .card-glow {
+            opacity: 1;
+        }
+
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .card-icon .material-symbols-outlined {
+            font-size: 28px;
+            color: white;
+        }
+
+        .card-icon.purple {
+            background: linear-gradient(135deg, #8b5cf6, #6366f1);
+            box-shadow: 0 8px 24px rgba(139, 92, 246, 0.3);
+        }
+
+        .card-icon.pink {
+            background: linear-gradient(135deg, #ec4899, #f43f5e);
+            box-shadow: 0 8px 24px rgba(236, 72, 153, 0.3);
+        }
+
+        .card-icon.cyan {
+            background: linear-gradient(135deg, #06b6d4, #0ea5e9);
+            box-shadow: 0 8px 24px rgba(6, 182, 212, 0.3);
+        }
+
+        .card-icon.green {
+            background: linear-gradient(135deg, #10b981, #22c55e);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.25rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            font-family: inherit;
+            width: 100%;
+        }
+
+        .card-btn:hover {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+            box-shadow: 0 8px 24px var(--glow-pink);
+        }
+
+        .card-btn .material-symbols-outlined {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .card-btn:hover .material-symbols-outlined {
+            transform: translateX(4px);
+        }
+
+        .card-secondary-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            font-family: inherit;
+            margin-top: 0.75rem;
+        }
+
+        .card-secondary-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .card-secondary-btn .material-symbols-outlined {
+            font-size: 16px;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 2rem;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-content {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .footer-brand span:first-child {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .footer-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--accent-primary);
+        }
+
+        .footer-link .material-symbols-outlined {
+            font-size: 18px;
+        }
+
+        /* Responsive Fixes */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem 1.5rem;
+            }
+
+            .hero {
+                padding: 3rem 1.5rem;
+            }
+
+            .hero-content {
+                margin-bottom: 3rem;
+            }
+
+            .bento-grid {
+                gap: 1rem;
+            }
         }
     </style>
 </head>
 
-<body
-    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-x-hidden min-h-screen flex flex-col">
-    <!-- Background Elements -->
-    <div class="fixed inset-0 z-0 pointer-events-none">
-        <div class="absolute inset-0 bg-grid-pattern bg-grid opacity-[0.15]"></div>
-        <div class="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-teto-accent/20 rounded-full blur-[120px]">
-        </div>
-        <div class="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-teto-accent/10 rounded-full blur-[100px]">
-        </div>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-gradient-animate">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
     </div>
-    <!-- Main Wrapper -->
-    <div class="relative z-10 flex flex-col flex-grow">
+
+    <!-- Grid Pattern -->
+    <div class="grid-pattern"></div>
+
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
         <!-- Navbar -->
-        <header
-            class="w-full px-6 py-4 lg:px-12 flex justify-between items-center border-b border-white/5 bg-background-dark/50 backdrop-blur-md sticky top-0 z-50">
-            <div class="flex items-center gap-3 group cursor-pointer">
-                <div
-                    class="relative w-10 h-10 flex items-center justify-center bg-gradient-to-br from-teto-accent to-pink-600 rounded-lg shadow-lg group-hover:scale-105 transition-transform">
-                    <span class="material-symbols-outlined text-white" style="font-size: 24px;">graphic_eq</span>
+        <nav class="navbar">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <span class="material-symbols-outlined">graphic_eq</span>
                 </div>
-                <h1 class="text-xl font-bold tracking-tight text-white group-hover:text-teto-accent transition-colors">
-                    iloveteto.com</h1>
-            </div>
-            <button onclick="toggleLanguage()" id="lang-toggle"
-                class="bg-white/10 hover:bg-white/20 text-white text-sm font-semibold py-2 px-3 rounded-lg transition-colors border border-white/5 flex items-center gap-1.5">
-                <span class="material-symbols-outlined text-[16px]">translate</span>
+                <span class="logo-text">iloveteto.com</span>
+            </a>
+            <button class="lang-toggle" onclick="toggleLanguage()" id="lang-toggle">
+                <span class="material-symbols-outlined">translate</span>
                 <span id="lang-text">TR</span>
             </button>
-        </header>
-        <!-- Hero Section -->
-        <main class="flex-grow flex flex-col items-center justify-center px-6 py-12 lg:py-20 max-w-7xl mx-auto w-full">
-            <div class="text-center mb-16 relative">
-                <!-- Decorative '04' Watermark -->
-                <div
-                    class="absolute -top-20 -right-20 lg:-right-40 text-[120px] lg:text-[200px] font-black text-white/[0.03] select-none pointer-events-none leading-none z-0">
-                    04
-                </div>
+        </nav>
 
-                <h2 class="text-5xl lg:text-7xl font-black text-white tracking-tight mb-6 leading-tight relative z-10">
-                    <span data-i18n="heroTitle">Welcome to the </span><br />
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-teto-accent to-pink-500 text-glow"
-                        data-i18n="heroHub">Hub</span>
-                </h2>
-                <p class="text-gray-400 text-lg lg:text-xl max-w-2xl mx-auto leading-relaxed relative z-10"
-                    data-i18n="heroDesc">
+        <!-- Hero Section -->
+        <main class="hero">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="material-symbols-outlined" style="font-size: 16px;">auto_awesome</span>
+                    <span data-i18n="badgeText">Discover Our Universe</span>
+                </div>
+                <h1 class="hero-title">
+                    <span data-i18n="heroTitle">Welcome to the</span><br>
+                    <span class="highlight" data-text="Hub" data-i18n="heroHub">Hub</span>
+                </h1>
+                <p class="hero-subtitle" data-i18n="heroDesc">
                     The ultimate collection of services. Build your profile, play games, and explore the archive.
                 </p>
             </div>
-            <!-- Service Cards Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full relative z-10">
+
+            <!-- Ad Banner 1 -->
+            <div class="ad-container">
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                    data-ad-slot="YOUR_AD_SLOT_1" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                <div class="ad-placeholder">
+                    <span class="material-symbols-outlined">ads_click</span>
+                    Reklam Alanı • Ad Space
+                </div>
+            </div>
+
+            <!-- Bento Grid -->
+            <div class="bento-grid">
                 <!-- Card 1: Cardly -->
-                <div class="glass-card rounded-2xl p-6 flex flex-col group h-full">
-                    <div
-                        class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-purple-500/20">
-                        <span class="material-symbols-outlined text-white">badge</span>
+                <div class="card">
+                    <div class="card-glow"
+                        style="background: radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.15), transparent 60%);">
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2" data-i18n="cardlyTitle">Cardly Profiles</h3>
-                    <p class="text-gray-400 text-sm mb-6 flex-grow" data-i18n="cardlyDesc">Create your ultimate bio link
-                        with custom themes and layouts.</p>
-                    <a href="https://cardly.iloveteto.com"
-                        class="w-full py-2.5 px-4 bg-charcoal hover:bg-teto-accent border border-white/10 hover:border-transparent rounded-lg text-white text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:shadow-teto-accent/25">
+                    <div class="card-icon purple">
+                        <span class="material-symbols-outlined">badge</span>
+                    </div>
+                    <h3 class="card-title" data-i18n="cardlyTitle">Cardly Profiles</h3>
+                    <p class="card-desc" data-i18n="cardlyDesc">Create your ultimate bio link with custom themes and
+                        layouts.</p>
+                    <a href="https://cardly.iloveteto.com" class="card-btn">
                         <span data-i18n="cardlyBtn">Create Profile</span>
-                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                        <span class="material-symbols-outlined">arrow_forward</span>
                     </a>
                 </div>
+
                 <!-- Card 2: Games -->
-                <div class="glass-card rounded-2xl p-6 flex flex-col group h-full">
-                    <div
-                        class="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-pink-500/20">
-                        <span class="material-symbols-outlined text-white">sports_esports</span>
+                <div class="card">
+                    <div class="card-glow"
+                        style="background: radial-gradient(circle at 50% 0%, rgba(236, 72, 153, 0.15), transparent 60%);">
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2" data-i18n="gamesTitle">Arcade</h3>
-                    <p class="text-gray-400 text-sm mb-6 flex-grow" data-i18n="gamesDesc">Play exclusive web games
-                        directly in your browser.</p>
-                    <a href="https://games.iloveteto.com"
-                        class="w-full py-2.5 px-4 bg-charcoal hover:bg-teto-accent border border-white/10 hover:border-transparent rounded-lg text-white text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:shadow-teto-accent/25">
+                    <div class="card-icon pink">
+                        <span class="material-symbols-outlined">sports_esports</span>
+                    </div>
+                    <h3 class="card-title" data-i18n="gamesTitle">Arcade</h3>
+                    <p class="card-desc" data-i18n="gamesDesc">Play exclusive web games directly in your browser.</p>
+                    <a href="https://games.iloveteto.com" class="card-btn">
                         <span data-i18n="gamesBtn">Play Now</span>
-                        <span class="material-symbols-outlined text-[16px]">play_arrow</span>
+                        <span class="material-symbols-outlined">play_arrow</span>
                     </a>
                 </div>
+
                 <!-- Card 3: Media Archive -->
-                <div class="glass-card rounded-2xl p-6 flex flex-col group h-full relative overflow-hidden">
-                    <div
-                        class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-blue-500/20">
-                        <span class="material-symbols-outlined text-white">folder_open</span>
+                <div class="card">
+                    <div class="card-glow"
+                        style="background: radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.15), transparent 60%);">
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2" data-i18n="mediaTitle">Media Archive</h3>
-                    <p class="text-gray-400 text-sm mb-4 flex-grow" data-i18n="mediaDesc">A vast collection of music and
-                        media history.</p>
-                    <div class="flex flex-col gap-2">
-                        <a href="https://media.iloveteto.com/invite"
-                            class="w-full py-2.5 px-4 bg-charcoal hover:bg-teto-accent border border-white/10 hover:border-transparent rounded-lg text-white text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:shadow-teto-accent/25">
-                            <span data-i18n="mediaBtn">Register</span>
-                            <span class="material-symbols-outlined text-[16px]">person_add</span>
-                        </a>
-                        <a href="https://media.iloveteto.com"
-                            class="w-full py-2 px-4 bg-transparent hover:bg-white/5 border border-white/10 rounded-lg text-gray-400 hover:text-white text-sm font-medium transition-all duration-300 flex items-center justify-center gap-2">
-                            <span data-i18n="mediaGoBtn">Go to Archive</span>
-                            <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
-                        </a>
+                    <div class="card-icon cyan">
+                        <span class="material-symbols-outlined">folder_open</span>
                     </div>
+                    <h3 class="card-title" data-i18n="mediaTitle">Media Archive</h3>
+                    <p class="card-desc" data-i18n="mediaDesc">A vast collection of music, media, anime and more.</p>
+                    <a href="https://media.iloveteto.com/invite" class="card-btn">
+                        <span data-i18n="mediaBtn">Register</span>
+                        <span class="material-symbols-outlined">person_add</span>
+                    </a>
+                    <a href="https://media.iloveteto.com" class="card-secondary-btn">
+                        <span data-i18n="mediaGoBtn">Go to Archive</span>
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </a>
                 </div>
-                <!-- Card 4: Minecraft SMP -->
-                <div class="glass-card rounded-2xl p-6 flex flex-col group h-full">
-                    <div
-                        class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-green-500/20">
-                        <span class="material-symbols-outlined text-white">dns</span>
+
+                <!-- Card 4: Minecraft -->
+                <div class="card">
+                    <div class="card-glow"
+                        style="background: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.15), transparent 60%);">
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-2" data-i18n="mcTitle">Minecraft SMP</h3>
-                    <p class="text-gray-400 text-sm mb-6 flex-grow" data-i18n="mcDesc">Join the survival server. Version
-                        1.18.2+. Build your legacy.</p>
-                    <button onclick="copyIP()" id="copy-ip-btn"
-                        class="w-full py-2.5 px-4 bg-charcoal hover:bg-teto-accent border border-white/10 hover:border-transparent rounded-lg text-white text-sm font-semibold transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:shadow-teto-accent/25">
+                    <div class="card-icon green">
+                        <span class="material-symbols-outlined">dns</span>
+                    </div>
+                    <h3 class="card-title" data-i18n="mcTitle">Minecraft SMP</h3>
+                    <p class="card-desc" data-i18n="mcDesc">Join the survival server. Version 1.18.2+. Build your
+                        legacy.</p>
+                    <button onclick="copyIP()" id="copy-ip-btn" class="card-btn">
                         <span id="copy-ip-text" data-i18n="mcBtn">Copy IP</span>
-                        <span id="copy-ip-icon" class="material-symbols-outlined text-[16px]">content_copy</span>
+                        <span id="copy-ip-icon" class="material-symbols-outlined">content_copy</span>
                     </button>
-                    <script>
-                        // Translation System
-                        const translations = {
-                            en: {
-                                heroHub: "Hub",
-                                heroTitle: "Welcome to the ",
-                                heroDesc: "The ultimate collection of services. Build your profile, play games, and explore the archive.",
-                                cardlyTitle: "Cardly Profiles",
-                                cardlyDesc: "Create your ultimate bio link with custom themes and layouts.",
-                                cardlyBtn: "Create Profile",
-                                gamesTitle: "Arcade",
-                                gamesDesc: "Play exclusive web games directly in your browser.",
-                                gamesBtn: "Play Now",
-                                mediaTitle: "Media Archive",
-                                mediaDesc: "A vast collection of music, media, anime and more.",
-                                mediaBtn: "Register",
-                                mediaGoBtn: "Go to Archive",
-                                mcTitle: "Minecraft SMP",
-                                mcDesc: "Join the survival server. Version 1.18.2+. Build your legacy.",
-                                mcBtn: "Copy IP",
-                                copied: "Copied!"
-                            },
-                            tr: {
-                                heroHub: "Hub'a",
-                                heroTitle: "Hoş Geldiniz",
-                                heroDesc: "En kapsamlı servis koleksiyonu. Profilinizi oluşturun, oyunlar oynayın ve arşivi keşfedin.",
-                                cardlyTitle: "Cardly Profiller",
-                                cardlyDesc: "Özel temalar ve düzenlerle kendinize bio link oluşturun.",
-                                cardlyBtn: "Profil Oluştur",
-                                gamesTitle: "Arcade",
-                                gamesDesc: "Tarayıcınızda özel web oyunları oynayın.",
-                                gamesBtn: "Oyna",
-                                mediaTitle: "Medya Arşivi",
-                                mediaDesc: "Geniş müzik, medya ve anime koleksiyonu.",
-                                mediaBtn: "Kayıt Ol",
-                                mediaGoBtn: "Arşive Git",
-                                mcTitle: "Minecraft SMP",
-                                mcDesc: "Survival sunucusuna katılın. Sürüm 1.18.2+. Mirasınızı inşa edin.",
-                                mcBtn: "IP Kopyala",
-                                copied: "Kopyalandı!"
-                            }
-                        };
+                </div>
+            </div>
 
-                        let currentLang = localStorage.getItem('lang') || 'en';
-
-                        function toggleLanguage() {
-                            currentLang = currentLang === 'en' ? 'tr' : 'en';
-                            localStorage.setItem('lang', currentLang);
-                            applyTranslations();
-                        }
-
-                        function applyTranslations() {
-                            document.querySelectorAll('[data-i18n]').forEach(el => {
-                                const key = el.dataset.i18n;
-                                if (translations[currentLang][key]) {
-                                    el.textContent = translations[currentLang][key];
-                                }
-                            });
-
-                            // Handle hero title order for Turkish
-                            const heroTitle = document.querySelector('[data-i18n="heroTitle"]');
-                            const heroHub = document.querySelector('[data-i18n="heroHub"]');
-                            const h2 = heroTitle.parentElement;
-                            const br = h2.querySelector('br');
-
-                            if (currentLang === 'tr') {
-                                // Turkish: Hub'a Hoş Geldiniz (Hub first)
-                                h2.innerHTML = '';
-                                h2.appendChild(heroHub);
-                                h2.appendChild(document.createTextNode(' '));
-                                h2.appendChild(heroTitle);
-                            } else {
-                                // English: Welcome to the Hub (Title first)
-                                h2.innerHTML = '';
-                                h2.appendChild(heroTitle);
-                                h2.appendChild(br || document.createElement('br'));
-                                h2.appendChild(heroHub);
-                            }
-
-                            // Re-apply translations after DOM change
-                            heroTitle.textContent = translations[currentLang].heroTitle;
-                            heroHub.textContent = translations[currentLang].heroHub;
-                            heroHub.className = 'text-transparent bg-clip-text bg-gradient-to-r from-teto-accent to-pink-500 text-glow';
-
-                            document.getElementById('lang-text').textContent = currentLang === 'en' ? 'TR' : 'EN';
-                            document.documentElement.lang = currentLang;
-                        }
-
-                        // Apply on page load
-                        document.addEventListener('DOMContentLoaded', applyTranslations);
-
-                        // Copy IP Function
-                        function copyIP() {
-                            const ip = "play.iloveteto.com";
-                            navigator.clipboard.writeText(ip).then(() => {
-                                const textEl = document.getElementById('copy-ip-text');
-                                const iconEl = document.getElementById('copy-ip-icon');
-                                const originalText = translations[currentLang].mcBtn;
-                                textEl.innerText = translations[currentLang].copied;
-                                iconEl.innerText = 'check';
-                                setTimeout(() => {
-                                    textEl.innerText = originalText;
-                                    iconEl.innerText = 'content_copy';
-                                }, 2000);
-                            });
-                        }
-                    </script>
+            <!-- Ad Banner 2 -->
+            <div class="ad-container" style="margin-top: 3rem;">
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                    data-ad-slot="YOUR_AD_SLOT_2" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                <div class="ad-placeholder">
+                    <span class="material-symbols-outlined">ads_click</span>
+                    Reklam Alanı • Ad Space
                 </div>
             </div>
         </main>
+
         <!-- Footer -->
-        <footer class="border-t border-white/5 bg-background-dark/80 backdrop-blur-sm relative z-10">
-            <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col md:flex-row justify-between items-center gap-6">
-                <div class="flex flex-col items-center md:items-start gap-2">
-                    <div class="flex items-center gap-2 text-white/80">
-                        <span class="text-sm font-bold">iloveteto.com</span>
-                        <span class="text-xs text-gray-500">•</span>
-                        <span class="text-xs text-gray-500">Est. 2026</span>
-                    </div>
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span>iloveteto.com</span>
+                    <span>•</span>
+                    <span>Est. 2026</span>
                 </div>
-                <a href="mailto:support@iloveteto.com"
-                    class="text-gray-400 hover:text-teto-accent transition-colors text-sm flex items-center gap-2">
-                    <span class="material-symbols-outlined text-[18px]">mail</span>
+                <a href="mailto:support@iloveteto.com" class="footer-link">
+                    <span class="material-symbols-outlined">mail</span>
                     support@iloveteto.com
                 </a>
-
             </div>
         </footer>
     </div>
+
+    <script>
+        // Create Floating Particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+
+                const colors = ['#ff2d75', '#7b2cff', '#00d4ff'];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.width = (2 + Math.random() * 4) + 'px';
+                particle.style.height = particle.style.width;
+
+                container.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Translation System
+        const translations = {
+            en: {
+                badgeText: "Discover Our Universe",
+                heroHub: "Hub",
+                heroTitle: "Welcome to the",
+                heroDesc: "The ultimate collection of services. Build your profile, play games, and explore the archive.",
+                cardlyTitle: "Cardly Profiles",
+                cardlyDesc: "Create your ultimate bio link with custom themes and layouts.",
+                cardlyBtn: "Create Profile",
+                gamesTitle: "Arcade",
+                gamesDesc: "Play exclusive web games directly in your browser.",
+                gamesBtn: "Play Now",
+                mediaTitle: "Media Archive",
+                mediaDesc: "A vast collection of music, media, anime and more.",
+                mediaBtn: "Register",
+                mediaGoBtn: "Go to Archive",
+                mcTitle: "Minecraft SMP",
+                mcDesc: "Join the survival server. Version 1.18.2+. Build your legacy.",
+                mcBtn: "Copy IP",
+                copied: "Copied!"
+            },
+            tr: {
+                badgeText: "Evrenimizi Keşfet",
+                heroHub: "Hub'a",
+                heroTitle: "Hoş Geldiniz",
+                heroDesc: "En kapsamlı servis koleksiyonu. Profilinizi oluşturun, oyunlar oynayın ve arşivi keşfedin.",
+                cardlyTitle: "Cardly Profiller",
+                cardlyDesc: "Özel temalar ve düzenlerle kendinize bio link oluşturun.",
+                cardlyBtn: "Profil Oluştur",
+                gamesTitle: "Arcade",
+                gamesDesc: "Tarayıcınızda özel web oyunları oynayın.",
+                gamesBtn: "Oyna",
+                mediaTitle: "Medya Arşivi",
+                mediaDesc: "Geniş müzik, medya ve anime koleksiyonu.",
+                mediaBtn: "Kayıt Ol",
+                mediaGoBtn: "Arşive Git",
+                mcTitle: "Minecraft SMP",
+                mcDesc: "Survival sunucusuna katılın. Sürüm 1.18.2+. Mirasınızı inşa edin.",
+                mcBtn: "IP Kopyala",
+                copied: "Kopyalandı!"
+            }
+        };
+
+        let currentLang = localStorage.getItem('lang') || 'en';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'tr' : 'en';
+            localStorage.setItem('lang', currentLang);
+            applyTranslations();
+        }
+
+        function applyTranslations() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (translations[currentLang][key]) {
+                    el.textContent = translations[currentLang][key];
+                }
+            });
+
+            // Handle hero title order for Turkish
+            const heroTitle = document.querySelector('[data-i18n="heroTitle"]');
+            const heroHub = document.querySelector('[data-i18n="heroHub"]');
+            const h1 = heroTitle.closest('.hero-title');
+
+            if (currentLang === 'tr') {
+                h1.innerHTML = `
+                    <span class="highlight" data-text="${translations.tr.heroHub}" data-i18n="heroHub">${translations.tr.heroHub}</span>
+                    <br>
+                    <span data-i18n="heroTitle">${translations.tr.heroTitle}</span>
+                `;
+            } else {
+                h1.innerHTML = `
+                    <span data-i18n="heroTitle">${translations.en.heroTitle}</span><br>
+                    <span class="highlight" data-text="${translations.en.heroHub}" data-i18n="heroHub">${translations.en.heroHub}</span>
+                `;
+            }
+
+            document.getElementById('lang-text').textContent = currentLang === 'en' ? 'TR' : 'EN';
+            document.documentElement.lang = currentLang;
+        }
+
+        // Apply on page load
+        document.addEventListener('DOMContentLoaded', applyTranslations);
+
+        // Copy IP Function
+        function copyIP() {
+            const ip = "play.iloveteto.com";
+            navigator.clipboard.writeText(ip).then(() => {
+                const textEl = document.getElementById('copy-ip-text');
+                const iconEl = document.getElementById('copy-ip-icon');
+                const originalText = translations[currentLang].mcBtn;
+                textEl.innerText = translations[currentLang].copied;
+                iconEl.innerText = 'check';
+                setTimeout(() => {
+                    textEl.innerText = originalText;
+                    iconEl.innerText = 'content_copy';
+                }, 2000);
+            });
+        }
+    </script>
 </body>
 
 </html>
