@@ -611,74 +611,11 @@
         </div>
 
         <!-- Dashboard Grid -->
-        <div class="bento-grid">
-            <!-- Cardly -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon purple">
-                        <span class="material-symbols-outlined">badge</span>
-                    </div>
-                    <h3 class="card-title" data-i18n="cardlyTitle">Cardly</h3>
-                </div>
-                <p class="card-desc" data-i18n="cardlyDesc">
-                    Build your ultimate bio link page. Customizable, fast, and free.
-                </p>
-                <a href="https://cardly.iloveteto.com" class="btn">
-                    <span data-i18n="cardlyBtn">Open App</span>
-                    <span class="material-symbols-outlined">arrow_outward</span>
-                </a>
-            </div>
-
-            <!-- Games -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon pink">
-                        <span class="material-symbols-outlined">sports_esports</span>
-                    </div>
-                    <h3 class="card-title" data-i18n="gamesTitle">Arcade</h3>
-                </div>
-                <p class="card-desc" data-i18n="gamesDesc">
-                    Play browser-based games instantly. No downloads required.
-                </p>
-                <a href="https://games.iloveteto.com" class="btn">
-                    <span data-i18n="gamesBtn">Play Now</span>
-                    <span class="material-symbols-outlined">play_arrow</span>
-                </a>
-            </div>
-
-            <!-- Media -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon cyan">
-                        <span class="material-symbols-outlined">folder_open</span>
-                    </div>
-                    <h3 class="card-title" data-i18n="mediaTitle">Media Archive</h3>
-                </div>
-                <p class="card-desc" data-i18n="mediaDesc">
-                    Access our curated collection of music, videos, and resources.
-                </p>
-                <div style="display:flex; gap: 0.5rem; flex-wrap: wrap;">
-                    <a href="https://media.iloveteto.com" class="btn" style="flex:1">Go to Archive</a>
-                    <a href="https://media.iloveteto.com/invite" class="btn btn-text"
-                        style="padding: 0.75rem;">Register</a>
-                </div>
-            </div>
-
-            <!-- Minecraft -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon green">
-                        <span class="material-symbols-outlined">dns</span>
-                    </div>
-                    <h3 class="card-title" data-i18n="mcTitle">Minecraft SMP</h3>
-                </div>
-                <p class="card-desc" data-i18n="mcDesc">
-                    Join our community server (1.18.2+).
-                </p>
-                <button onclick="copyIP()" class="btn" id="copy-btn" style="width: 100%;">
-                    <span class="material-symbols-outlined">content_copy</span>
-                    <span id="copy-text" data-i18n="mcBtn">Copy IP Address</span>
-                </button>
+        <div class="bento-grid" id="bento-grid">
+            <!-- Cards loaded dynamically from Firebase -->
+            <div style="text-align:center; grid-column: 1 / -1; padding: 2rem; color: var(--text-muted);">
+                <span class="material-symbols-outlined" style="font-size:2rem">hourglass_top</span>
+                <p>Loading...</p>
             </div>
         </div>
 
@@ -714,6 +651,11 @@
         </a>
     </nav>
 
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+    <script src="firebase-config.js"></script>
+
     <script>
         // Translations
         const i18n = {
@@ -721,17 +663,7 @@
                 navHome: "Hub",
                 heroTitle: "Welcome to the <br><span class='highlight'>Hub</span>",
                 heroDesc: "Your central dashboard for everything. Create profiles, play arcade games, and explore the media archive from one place.",
-                cardlyTitle: "Cardly",
-                cardlyDesc: "Build your ultimate bio link page. Customizable, fast, and free.",
-                cardlyBtn: "Open App",
-                gamesTitle: "Arcade",
-                gamesDesc: "Play browser-based games instantly. No downloads required.",
-                gamesBtn: "Play Now",
-                mediaTitle: "Media Archive",
-                mediaDesc: "Access our curated collection of music, videos, and resources.",
-                mcTitle: "Minecraft SMP",
-                mcDesc: "Join our community server (1.18.2+).",
-                mcBtn: "Copy IP Address",
+                maintenanceLabel: "Under Maintenance",
                 copied: "IP Copied!",
                 langLabel: "Language: EN"
             },
@@ -739,17 +671,7 @@
                 navHome: "Hub",
                 heroTitle: "<span class='highlight'>Hub'a</span><br>Hoş Geldiniz",
                 heroDesc: "Her şey için merkezi panonuz. Tek bir yerden profil oluşturun, arcade oyunları oynayın ve medya arşivini keşfedin.",
-                cardlyTitle: "Cardly",
-                cardlyDesc: "En iyi bio link sayfanızı oluşturun. Özelleştirilebilir, hızlı ve ücretsiz.",
-                cardlyBtn: "Uygulamayı Aç",
-                gamesTitle: "Atari",
-                gamesDesc: "Tarayıcı tabanlı oyunları anında oynayın. İndirme gerekmez.",
-                gamesBtn: "Oyna",
-                mediaTitle: "Medya Arşivi",
-                mediaDesc: "Özenle seçilmiş müzik, video ve kaynak koleksiyonumuza erişin.",
-                mcTitle: "Minecraft Sunucusu",
-                mcDesc: "Topluluk sunucumuza katılın (1.18.2+).",
-                mcBtn: "IP Adresini Kopyala",
+                maintenanceLabel: "Bakımda",
                 copied: "Kopyalandı!",
                 langLabel: "Dil: TR"
             }
@@ -761,7 +683,7 @@
             document.documentElement.lang = currentLang;
             const texts = i18n[currentLang];
 
-            // Update Text
+            // Update static i18n elements (hero, nav)
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.dataset.i18n;
                 if (texts[key]) el.innerHTML = texts[key];
@@ -770,6 +692,9 @@
             // Update Labels
             document.getElementById('lang-label').innerHTML = `<span class="material-symbols-outlined">translate</span> ${texts.langLabel}`;
             document.getElementById('mobile-lang-text').innerText = currentLang.toUpperCase();
+
+            // Re-render cards with current language
+            if (window._firebaseCards) renderCards(window._firebaseCards);
         }
 
         function toggleLanguage() {
@@ -778,19 +703,103 @@
             applyLanguage();
         }
 
-        function copyIP() {
-            navigator.clipboard.writeText('play.iloveteto.com');
-            const btn = document.getElementById('copy-btn');
-            const txt = document.getElementById('copy-text');
-            const original = txt.innerText;
+        function copyIP(ip) {
+            navigator.clipboard.writeText(ip);
+            showCopiedFeedback();
+        }
 
+        function showCopiedFeedback() {
+            const btn = document.getElementById('copy-btn');
+            if (!btn) return;
+            const txt = btn.querySelector('.btn-label');
+            if (!txt) return;
+            const original = txt.innerText;
             txt.innerText = i18n[currentLang].copied;
             btn.style.background = 'var(--accent-primary)';
-
             setTimeout(() => {
-                txt.innerText = i18n[currentLang].mcBtn;
-                btn.style.background = ''; // reset
+                txt.innerText = original;
+                btn.style.background = '';
             }, 2000);
+        }
+
+        // ============================================
+        // Dynamic Card Rendering from Firebase
+        // ============================================
+        function renderCards(cards) {
+            const grid = document.getElementById('bento-grid');
+            const lang = currentLang;
+            grid.innerHTML = '';
+
+            for (const [id, card] of Object.entries(cards)) {
+                const isMaint = card.maintenance === true;
+                const title = card[`title_${lang}`] || card.title_en || id;
+                const desc = isMaint ? i18n[lang].maintenanceLabel : (card[`desc_${lang}`] || card.desc_en || '');
+                const btnText = isMaint ? i18n[lang].maintenanceLabel : (card[`btnText_${lang}`] || card.btnText_en || 'Open');
+                const url = card.url || '#';
+                const icon = card.icon || 'widgets';
+                const iconColor = card.iconColor || 'purple';
+
+                const cardEl = document.createElement('div');
+                cardEl.className = 'card';
+
+                // Special case for Minecraft: copy IP button
+                const isMinecraft = id === 'minecraft';
+                let btnHtml;
+
+                if (isMaint) {
+                    btnHtml = `<button class="btn" disabled style="opacity: 0.5; cursor: not-allowed;">
+                        <span class="material-symbols-outlined">build</span>
+                        <span>${btnText}</span>
+                    </button>`;
+                } else if (isMinecraft) {
+                    btnHtml = `<button class="btn" id="copy-btn" onclick="copyIP('${url}')" style="width:100%">
+                        <span class="material-symbols-outlined">content_copy</span>
+                        <span class="btn-label">${btnText}</span>
+                    </button>`;
+                } else {
+                    btnHtml = `<a href="${url}" class="btn">
+                        <span>${btnText}</span>
+                        <span class="material-symbols-outlined">arrow_outward</span>
+                    </a>`;
+                }
+
+                cardEl.innerHTML = `
+                    <div class="card-header">
+                        <div class="card-icon ${iconColor}">
+                            <span class="material-symbols-outlined">${icon}</span>
+                        </div>
+                        <h3 class="card-title">${title}</h3>
+                    </div>
+                    <p class="card-desc">${desc}</p>
+                    ${btnHtml}
+                `;
+                grid.appendChild(cardEl);
+            }
+        }
+
+        // ============================================
+        // Firebase Loader (with fallback)
+        // ============================================
+        function loadCardsFromFirebase() {
+            try {
+                firebase.initializeApp(firebaseConfig);
+                const db = firebase.database();
+                db.ref('cards').on('value', (snapshot) => {
+                    const cards = snapshot.val();
+                    if (cards) {
+                        window._firebaseCards = cards;
+                        renderCards(cards);
+                    } else {
+                        // No data in Firebase, use defaults
+                        window._firebaseCards = DEFAULT_CARDS;
+                        renderCards(DEFAULT_CARDS);
+                    }
+                });
+            } catch (e) {
+                console.warn('Firebase unavailable, using default cards:', e);
+                window._firebaseCards = DEFAULT_CARDS;
+                renderCards(DEFAULT_CARDS);
+            }
         }
 
         // ============================================
@@ -921,6 +930,7 @@
 
         // Init
         applyLanguage();
+        loadCardsFromFirebase();
         CursorEngine.init();
     </script>
 </body>
