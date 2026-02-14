@@ -6,13 +6,14 @@
 // Copy the config object and paste the values below.
 
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    databaseURL: "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyDsBq4k1pqGgmMDqQoKQCeGVwpVOQJwNtE",
+    authDomain: "iloveteto.firebaseapp.com",
+    databaseURL: "https://iloveteto-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "iloveteto",
+    storageBucket: "iloveteto.firebasestorage.app",
+    messagingSenderId: "310562937364",
+    appId: "1:310562937364:web:7a0b1f239e057f0be9e501",
+    measurementId: "G-3GV16GF33V"
 };
 
 // Default card data — used to seed Firebase on first run

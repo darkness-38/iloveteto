@@ -189,6 +189,7 @@
         }
 
         input[type="text"],
+        input[type="email"],
         input[type="password"],
         textarea {
             width: 100%;
@@ -500,13 +501,18 @@
                 <span class="material-symbols-outlined">admin_panel_settings</span>
             </div>
             <h2>Admin Panel</h2>
-            <p>Enter the admin password to continue.</p>
+            <p>Sign in with your admin account.</p>
             <form onsubmit="handleLogin(event)">
                 <div class="input-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Enter password..." autocomplete="off" />
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="admin@example.com" autocomplete="email" />
                 </div>
-                <div class="error-msg" id="login-error">Incorrect password. Try again.</div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter password..."
+                        autocomplete="current-password" />
+                </div>
+                <div class="error-msg" id="login-error"></div>
                 <button type="submit" class="btn" id="login-btn">
                     <span class="material-symbols-outlined">lock_open</span>
                     Login
@@ -548,6 +554,7 @@
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
     <script src="firebase-config.js"></script>
 
@@ -556,17 +563,11 @@
         // Firebase Init
         // ============================================
         firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
         const db = firebase.database();
 
-        // ============================================
-        // Simple SHA-256 Hash (Web Crypto API)
-        // ============================================
-        async function sha256(message) {
-            const encoder = new TextEncoder();
-            const data = encoder.encode(message);
-            const hash = await crypto.subtle.digest('SHA-256', data);
-            return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
-        }
+        // Allowed admin UID
+        const ADMIN_UID = 'DOeKW6M2diNmXTYVKpEu9xSZ71T2';
 
         // ============================================
         // Toast Notifications
@@ -582,46 +583,48 @@
         }
 
         // ============================================
-        // Login
+        // Login with Firebase Auth
         // ============================================
-        let isLoggedIn = false;
-
         async function handleLogin(e) {
             e.preventDefault();
+            const email = document.getElementById('email').value;
             const pwd = document.getElementById('password').value;
             const errorEl = document.getElementById('login-error');
             const btn = document.getElementById('login-btn');
 
-            if (!pwd) return;
+            if (!email || !pwd) return;
+            errorEl.style.display = 'none';
             btn.disabled = true;
-            btn.innerHTML = '<span class="material-symbols-outlined">hourglass_top</span> Checking...';
+            btn.innerHTML = '<span class="material-symbols-outlined">hourglass_top</span> Signing in...';
 
             try {
-                const hash = await sha256(pwd);
-                const snapshot = await db.ref('admin/passwordHash').once('value');
-                const storedHash = snapshot.val();
+                const userCredential = await auth.signInWithEmailAndPassword(email, pwd);
+                const user = userCredential.user;
 
-                if (!storedHash) {
-                    // First time: no password set yet. Set this one.
-                    await db.ref('admin/passwordHash').set(hash);
-                    showLogin(false);
-                    showToast('Password set & logged in!');
-                } else if (hash === storedHash) {
-                    showLogin(false);
-                    showToast('Welcome back!');
-                } else {
+                if (user.uid !== ADMIN_UID) {
+                    // Not the admin — sign out immediately
+                    await auth.signOut();
+                    errorEl.textContent = 'Access denied. You are not an admin.';
                     errorEl.style.display = 'block';
                     btn.disabled = false;
                     btn.innerHTML = '<span class="material-symbols-outlined">lock_open</span> Login';
                     return;
                 }
 
-                isLoggedIn = true;
-                sessionStorage.setItem('admin', 'true');
+                showLogin(false);
                 loadCards();
+                showToast('Welcome back!');
             } catch (err) {
                 console.error(err);
-                showToast('Firebase connection failed. Check config.', 'error');
+                const messages = {
+                    'auth/user-not-found': 'No account found with this email.',
+                    'auth/wrong-password': 'Incorrect password.',
+                    'auth/invalid-email': 'Invalid email address.',
+                    'auth/invalid-credential': 'Invalid email or password.',
+                    'auth/too-many-requests': 'Too many attempts. Try again later.',
+                };
+                errorEl.textContent = messages[err.code] || `Error: ${err.message}`;
+                errorEl.style.display = 'block';
                 btn.disabled = false;
                 btn.innerHTML = '<span class="material-symbols-outlined">lock_open</span> Login';
             }
@@ -633,11 +636,25 @@
         }
 
         function handleLogout() {
-            isLoggedIn = false;
-            sessionStorage.removeItem('admin');
-            document.getElementById('password').value = '';
-            showLogin(true);
+            auth.signOut().then(() => {
+                showLogin(true);
+                document.getElementById('email').value = '';
+                document.getElementById('password').value = '';
+                showToast('Logged out.');
+            });
         }
+
+        // ============================================
+        // Auto-restore session with onAuthStateChanged
+        // ============================================
+        auth.onAuthStateChanged((user) => {
+            if (user && user.uid === ADMIN_UID) {
+                showLogin(false);
+                loadCards();
+            } else {
+                showLogin(true);
+            }
+        });
 
         // ============================================
         // Load & Render Card Editors
@@ -797,14 +814,6 @@
                     loadCards();
                 })
                 .catch(() => showToast('Failed to seed', 'error'));
-        }
-
-        // ============================================
-        // Auto-login from session
-        // ============================================
-        if (sessionStorage.getItem('admin') === 'true') {
-            showLogin(false);
-            loadCards();
         }
     </script>
 </body>
