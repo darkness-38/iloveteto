@@ -763,6 +763,15 @@
                     </a>`;
                 }
 
+                // Optional register button (hidden during maintenance)
+                if (card.registerUrl && !isMaint) {
+                    const regText = card[`registerBtnText_${lang}`] || card.registerBtnText_en || 'Register';
+                    btnHtml += `<a href="${card.registerUrl}" class="btn" style="margin-top: 0.5rem; background: linear-gradient(135deg, var(--accent-primary), #d60046); color: white;">
+                        <span>${regText}</span>
+                        <span class="material-symbols-outlined">person_add</span>
+                    </a>`;
+                }
+
                 cardEl.innerHTML = `
                     <div class="card-header">
                         <div class="card-icon ${iconColor}">

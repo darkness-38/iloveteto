@@ -749,6 +749,22 @@
                         </div>
                     </div>
 
+                    <div class="input-group">
+                        <label>Register URL (optional, shown when not in maintenance)</label>
+                        <input type="text" id="${id}-registerUrl" value="${escHtml(card.registerUrl || '')}" placeholder="https://..." />
+                    </div>
+
+                    <div class="field-row">
+                        <div class="input-group">
+                            <label>Register Button (EN)</label>
+                            <input type="text" id="${id}-registerBtnText_en" value="${escHtml(card.registerBtnText_en || '')}" placeholder="Register" />
+                        </div>
+                        <div class="input-group">
+                            <label>Register Button (TR)</label>
+                            <input type="text" id="${id}-registerBtnText_tr" value="${escHtml(card.registerBtnText_tr || '')}" placeholder="Kayıt Ol" />
+                        </div>
+                    </div>
+
                     <div class="save-row">
                         <button class="btn" onclick="saveCard('${id}')">
                             <span class="material-symbols-outlined">save</span>
@@ -796,6 +812,9 @@
                 icon: document.getElementById(`${id}-icon`).value,
                 iconColor: document.getElementById(`${id}-iconColor`).value,
                 maintenance: document.getElementById(`toggle-${id}`).classList.contains('active'),
+                registerUrl: document.getElementById(`${id}-registerUrl`).value,
+                registerBtnText_en: document.getElementById(`${id}-registerBtnText_en`).value,
+                registerBtnText_tr: document.getElementById(`${id}-registerBtnText_tr`).value,
             };
 
             db.ref(`cards/${id}`).update(data)
