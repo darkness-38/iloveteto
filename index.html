@@ -814,7 +814,8 @@
                 mediaPopupTitle: "Archive Login Info",
                 mediaPopupUser: "Username",
                 mediaPopupPass: "Password",
-                mediaPopupOk: "Go to Archive"
+                mediaPopupOk: "Go to Archive",
+                requestBtn: "Request Content"
             },
             tr: {
                 navHome: "Hub",
@@ -826,7 +827,8 @@
                 mediaPopupTitle: "Arşiv Giriş Bilgileri",
                 mediaPopupUser: "Kullanıcı Adı",
                 mediaPopupPass: "Şifre",
-                mediaPopupOk: "Arşive Git"
+                mediaPopupOk: "Arşive Git",
+                requestBtn: "İçerik Talep Et"
             }
         };
 
@@ -910,9 +912,14 @@
                         <span class="btn-label">${btnText}</span>
                     </button>`;
                 } else if (id === 'media') {
+                    const reqText = i18n[lang].requestBtn;
                     btnHtml = `<button class="btn" onclick="showMediaPopup('${url}')">
                         <span>${btnText}</span>
                         <span class="material-symbols-outlined">arrow_outward</span>
+                    </button>
+                    <button class="btn" onclick="showMediaPopup('https://requests.iloveteto.com')" style="margin-top: 0.5rem; background: linear-gradient(135deg, var(--accent-primary), #d60046); color: white;">
+                        <span>${reqText}</span>
+                        <span class="material-symbols-outlined">rate_review</span>
                     </button>`;
                 } else {
                     btnHtml = `<a href="${url}" class="btn">
