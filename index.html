@@ -928,6 +928,14 @@
             }
         };
 
+        // Secret admin shortcut: Ctrl+Shift+A
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+                e.preventDefault();
+                window.location.href = 'admin.html';
+            }
+        });
+
         // Init
         applyLanguage();
         loadCardsFromFirebase();
