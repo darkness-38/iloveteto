@@ -30,13 +30,13 @@
             /* Core Colors - Teto Inspired (Deep Red/Black) */
             --bg-primary: #1a050d;
             --bg-secondary: #2d0a16;
-            --bg-sidebar: rgba(26, 5, 13, 0.95);
+            --bg-sidebar: rgba(26, 5, 13, 0.6);
 
-            /* Glassmorphism Variables - Optimized */
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            --glass-blur: blur(12px);
+            /* Glassmorphism Variables */
+            --glass-bg: rgba(255, 255, 255, 0.06);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glass-blur: blur(16px);
 
             /* Text */
             --text-primary: #ffffff;
@@ -45,11 +45,8 @@
 
             /* Accents - Kasane Teto Palette */
             --accent-primary: #ff0055;
-            /* Teto Pink/Red */
             --accent-secondary: #ffad33;
-            /* Gold/Drill */
             --accent-tertiary: #b3003b;
-            /* Deep Red */
 
             /* Dimensions */
             --sidebar-width: 260px;
@@ -72,12 +69,12 @@
             min-height: 100vh;
         }
 
-        /* Sidebar (Desktop) */
+        /* Sidebar (Desktop) - Glassmorphism */
         .sidebar {
             width: var(--sidebar-width);
             height: 100vh;
-            background: var(--bg-sidebar);
-            border-right: 1px solid var(--glass-border);
+            background: rgba(26, 5, 13, 0.55);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
             position: fixed;
             left: 0;
             top: 0;
@@ -85,7 +82,9 @@
             display: flex;
             flex-direction: column;
             z-index: 50;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            box-shadow: 4px 0 30px rgba(0, 0, 0, 0.3);
         }
 
         .logo {
@@ -136,9 +135,10 @@
 
         .nav-item:hover,
         .nav-item.active {
-            background: var(--glass-bg);
+            background: rgba(255, 255, 255, 0.08);
             color: var(--accent-primary);
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
         }
 
         .nav-item .material-symbols-outlined {
@@ -158,19 +158,22 @@
             align-items: center;
             justify-content: space-between;
             padding: 0.8rem 1rem;
-            background: transparent;
-            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
             color: var(--text-secondary);
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.3s ease;
             font-family: inherit;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
 
         .lang-btn:hover {
-            background: var(--glass-bg);
+            background: rgba(255, 255, 255, 0.1);
             color: var(--text-primary);
             border-color: var(--accent-secondary);
+            box-shadow: 0 4px 16px rgba(255, 173, 51, 0.15);
         }
 
         /* Main Content Area */
@@ -219,22 +222,24 @@
         }
 
         .card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 20px;
             padding: 1.5rem;
             display: flex;
             flex-direction: column;
-            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
             position: relative;
-            /* Context for z-index */
+            backdrop-filter: blur(12px) saturate(150%);
+            -webkit-backdrop-filter: blur(12px) saturate(150%);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08);
         }
 
         .card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(255, 0, 85, 0.3);
-            background: rgba(255, 255, 255, 0.05);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-6px);
+            border-color: rgba(255, 0, 85, 0.4);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 16px 48px rgba(255, 0, 85, 0.15), 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.12);
         }
 
         .card-header {
@@ -298,22 +303,25 @@
             justify-content: center;
             gap: 0.5rem;
             padding: 0.75rem 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glass-border);
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
             color: var(--text-primary);
             text-decoration: none;
             font-weight: 500;
             font-size: 0.9rem;
-            transition: 0.2s;
+            transition: all 0.3s ease;
             cursor: pointer;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
 
         .btn:hover {
-            background: var(--accent-primary);
-            border-color: var(--accent-primary);
+            background: rgba(255, 0, 85, 0.25);
+            border-color: rgba(255, 0, 85, 0.5);
             color: white;
-            box-shadow: 0 4px 12px rgba(255, 0, 85, 0.3);
+            box-shadow: 0 4px 20px rgba(255, 0, 85, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
         }
 
         .btn-text {
@@ -341,19 +349,21 @@
             color: var(--text-muted);
         }
 
-        /* Mobile Bottom Nav */
+        /* Mobile Bottom Nav - Glassmorphism */
         .mobile-nav {
             display: none;
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background: rgba(26, 5, 13, 0.95);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid var(--glass-border);
+            background: rgba(26, 5, 13, 0.55);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding: 0.8rem 1.5rem;
             z-index: 100;
             justify-content: space-between;
+            box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
         }
 
         .mobile-nav-item {
@@ -418,15 +428,98 @@
             width: 100%;
             height: 100%;
             z-index: -2;
-            background:
-                radial-gradient(circle at 15% 50%, rgba(255, 0, 85, 0.15), transparent 30%),
-                radial-gradient(circle at 85% 30%, rgba(255, 173, 51, 0.1), transparent 30%);
             background-color: var(--bg-primary);
+            overflow: hidden;
+        }
+
+        /* Animated gradient orbs */
+        .bg-fixed .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            will-change: transform;
+        }
+
+        .bg-fixed .orb-1 {
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(255, 0, 85, 0.35), transparent 70%);
+            top: -10%;
+            left: -10%;
+            animation: orb-float-1 18s ease-in-out infinite alternate;
+        }
+
+        .bg-fixed .orb-2 {
+            width: 40vw;
+            height: 40vw;
+            background: radial-gradient(circle, rgba(255, 173, 51, 0.3), transparent 70%);
+            top: 10%;
+            right: -5%;
+            animation: orb-float-2 22s ease-in-out infinite alternate;
+        }
+
+        .bg-fixed .orb-3 {
+            width: 45vw;
+            height: 45vw;
+            background: radial-gradient(circle, rgba(179, 0, 59, 0.3), transparent 70%);
+            bottom: -15%;
+            left: 30%;
+            animation: orb-float-3 20s ease-in-out infinite alternate;
+        }
+
+        .bg-fixed .orb-4 {
+            width: 30vw;
+            height: 30vw;
+            background: radial-gradient(circle, rgba(255, 0, 85, 0.2), transparent 70%);
+            top: 50%;
+            right: 20%;
+            animation: orb-float-4 25s ease-in-out infinite alternate;
+        }
+
+        @keyframes orb-float-1 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(15vw, 10vh) scale(1.2);
+            }
+        }
+
+        @keyframes orb-float-2 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(-10vw, 15vh) scale(0.9);
+            }
+        }
+
+        @keyframes orb-float-3 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(-15vw, -10vh) scale(1.15);
+            }
+        }
+
+        @keyframes orb-float-4 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(10vw, -12vh) scale(1.1);
+            }
         }
 
         .bg-teto {
             position: fixed;
-            bottom: -5%;
+            bottom: 5%;
             right: -5%;
             width: 80vh;
             height: 80vh;
@@ -435,11 +528,8 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: bottom right;
-            /* Multiply blend mode makes white pixels transparent (showing the dark bg behind) */
             mix-blend-mode: multiply;
-            /* Optional: Lower opacity to make it subtle */
             opacity: 0.8;
-            /* Filter to tweak the "Teto" figure look (e.g. slight red tint or contrast) */
             filter: contrast(120%) sepia(50%) hue-rotate(300deg);
             pointer-events: none;
         }
@@ -453,7 +543,12 @@
             }
         }
     </style>
-    <div class="bg-fixed"></div>
+    <div class="bg-fixed">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+    </div>
     <div class="bg-teto"></div>
 
     <!-- App Shell Layout -->
