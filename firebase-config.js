@@ -52,10 +52,7 @@ const DEFAULT_CARDS = {
         url: "https://media.iloveteto.com",
         icon: "folder_open",
         iconColor: "cyan",
-        maintenance: true,
-        registerUrl: "https://media.iloveteto.com/invite",
-        registerBtnText_en: "Register",
-        registerBtnText_tr: "Kayıt Ol"
+        maintenance: true
     },
     minecraft: {
         title_en: "Minecraft SMP",

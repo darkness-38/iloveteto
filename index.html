@@ -651,6 +651,151 @@
         </a>
     </nav>
 
+    <!-- Media Archive Credential Popup -->
+    <style>
+        .media-popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            animation: popupFadeIn 0.25s ease;
+        }
+
+        @keyframes popupFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .media-popup {
+            background: rgba(45, 10, 22, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            box-shadow: 0 16px 64px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            max-width: 380px;
+            width: 90%;
+            text-align: center;
+            animation: popupSlideIn 0.3s ease;
+        }
+
+        @keyframes popupSlideIn {
+            from {
+                transform: translateY(20px) scale(0.95);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .media-popup .popup-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 4px 16px rgba(255, 0, 85, 0.4);
+        }
+
+        .media-popup .popup-icon .material-symbols-outlined {
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .media-popup h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .media-popup .cred-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            margin-bottom: 0.75rem;
+        }
+
+        .media-popup .cred-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .media-popup .cred-value {
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ff0055;
+            background: rgba(255, 0, 85, 0.1);
+            padding: 0.25rem 0.75rem;
+            border-radius: 8px;
+        }
+
+        .media-popup .popup-ok-btn {
+            margin-top: 1.5rem;
+            width: 100%;
+            padding: 0.85rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(255, 0, 85, 0.3);
+        }
+
+        .media-popup .popup-ok-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(255, 0, 85, 0.45);
+        }
+    </style>
+
+    <div class="media-popup-overlay" id="media-popup-overlay">
+        <div class="media-popup">
+            <div class="popup-icon">
+                <span class="material-symbols-outlined">folder_open</span>
+            </div>
+            <h3 id="media-popup-title">Archive Login Info</h3>
+            <div class="cred-row">
+                <span class="cred-label" id="media-popup-user-label">Username:</span>
+                <span class="cred-value">guest</span>
+            </div>
+            <div class="cred-row">
+                <span class="cred-label" id="media-popup-pass-label">Password:</span>
+                <span class="cred-value">guest</span>
+            </div>
+            <button class="popup-ok-btn" id="media-popup-ok">Go to Archive</button>
+        </div>
+    </div>
+
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
@@ -665,7 +810,11 @@
                 heroDesc: "Your central dashboard for everything. Create profiles, play arcade games, and explore the media archive from one place.",
                 maintenanceLabel: "Under Maintenance",
                 copied: "IP Copied!",
-                langLabel: "Language: EN"
+                langLabel: "Language: EN",
+                mediaPopupTitle: "Archive Login Info",
+                mediaPopupUser: "Username",
+                mediaPopupPass: "Password",
+                mediaPopupOk: "Go to Archive"
             },
             tr: {
                 navHome: "Hub",
@@ -673,7 +822,11 @@
                 heroDesc: "Her şey için merkezi panonuz. Tek bir yerden profil oluşturun, arcade oyunları oynayın ve medya arşivini keşfedin.",
                 maintenanceLabel: "Bakımda",
                 copied: "Kopyalandı!",
-                langLabel: "Dil: TR"
+                langLabel: "Dil: TR",
+                mediaPopupTitle: "Arşiv Giriş Bilgileri",
+                mediaPopupUser: "Kullanıcı Adı",
+                mediaPopupPass: "Şifre",
+                mediaPopupOk: "Arşive Git"
             }
         };
 
@@ -756,19 +909,15 @@
                         <span class="material-symbols-outlined">content_copy</span>
                         <span class="btn-label">${btnText}</span>
                     </button>`;
+                } else if (id === 'media') {
+                    btnHtml = `<button class="btn" onclick="showMediaPopup('${url}')">
+                        <span>${btnText}</span>
+                        <span class="material-symbols-outlined">arrow_outward</span>
+                    </button>`;
                 } else {
                     btnHtml = `<a href="${url}" class="btn">
                         <span>${btnText}</span>
                         <span class="material-symbols-outlined">arrow_outward</span>
-                    </a>`;
-                }
-
-                // Optional register button (hidden during maintenance)
-                if (card.registerUrl && !isMaint) {
-                    const regText = card[`registerBtnText_${lang}`] || card.registerBtnText_en || 'Register';
-                    btnHtml += `<a href="${card.registerUrl}" class="btn" style="margin-top: 0.5rem; background: linear-gradient(135deg, var(--accent-primary), #d60046); color: white;">
-                        <span>${regText}</span>
-                        <span class="material-symbols-outlined">person_add</span>
                     </a>`;
                 }
 
@@ -943,6 +1092,28 @@
                 e.preventDefault();
                 window.location.href = 'admin.html';
             }
+        });
+
+        // ============================================
+        // Media Archive Credential Popup
+        // ============================================
+        function showMediaPopup(url) {
+            const texts = i18n[currentLang];
+            document.getElementById('media-popup-title').textContent = texts.mediaPopupTitle;
+            document.getElementById('media-popup-user-label').textContent = texts.mediaPopupUser + ':';
+            document.getElementById('media-popup-pass-label').textContent = texts.mediaPopupPass + ':';
+            document.getElementById('media-popup-ok').textContent = texts.mediaPopupOk;
+            document.getElementById('media-popup-ok').onclick = () => { window.open(url, '_blank'); closeMediaPopup(); };
+            document.getElementById('media-popup-overlay').style.display = 'flex';
+        }
+
+        function closeMediaPopup() {
+            document.getElementById('media-popup-overlay').style.display = 'none';
+        }
+
+        // Close popup on overlay click
+        document.getElementById('media-popup-overlay').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeMediaPopup();
         });
 
         // Init
