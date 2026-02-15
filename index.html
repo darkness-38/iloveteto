@@ -394,6 +394,55 @@
             text-align: center;
         }
 
+        .footer-uptime {
+            margin-top: 1.25rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .footer-uptime-text {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .footer-uptime-text .material-symbols-outlined {
+            font-size: 1.1rem;
+            color: var(--accent-primary);
+        }
+
+        .footer-uptime-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.55rem 1.25rem;
+            background: rgba(255, 0, 85, 0.1);
+            border: 1px solid rgba(255, 0, 85, 0.25);
+            border-radius: 10px;
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .footer-uptime-btn:hover {
+            background: rgba(255, 0, 85, 0.2);
+            border-color: rgba(255, 0, 85, 0.5);
+            box-shadow: 0 4px 16px rgba(255, 0, 85, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .footer-uptime-btn .material-symbols-outlined {
+            font-size: 1.1rem;
+        }
+
         /* Queries */
         @media (max-width: 768px) {
             .sidebar {
@@ -621,6 +670,17 @@
 
         <!-- Footer -->
         <footer>
+            <div class="footer-uptime">
+                <span class="footer-uptime-text">
+                    <span class="material-symbols-outlined">info</span>
+                    <span data-i18n="footerUptimeText">Something not working? Check our service status.</span>
+                </span>
+                <a href="https://uptime.iloveteto.com" target="_blank" rel="noopener noreferrer"
+                    class="footer-uptime-btn">
+                    <span class="material-symbols-outlined">monitor_heart</span>
+                    <span data-i18n="footerUptimeBtn">Service Status</span>
+                </a>
+            </div>
             <p>&copy; 2026 iloveteto.com • <a href="mailto:support@iloveteto.com" style="color: inherit;">Contact
                     Support</a></p>
         </footer>
@@ -815,7 +875,9 @@
                 mediaPopupUser: "Username",
                 mediaPopupPass: "Password",
                 mediaPopupOk: "Go to Archive",
-                requestBtn: "Request Content"
+                requestBtn: "Request Content",
+                footerUptimeText: "Something not working? Check our service status.",
+                footerUptimeBtn: "Service Status"
             },
             tr: {
                 navHome: "Hub",
@@ -828,7 +890,9 @@
                 mediaPopupUser: "Kullanıcı Adı",
                 mediaPopupPass: "Şifre",
                 mediaPopupOk: "Arşive Git",
-                requestBtn: "İçerik Talep Et"
+                requestBtn: "İçerik Talep Et",
+                footerUptimeText: "Bir şeyler mi çalışmıyor? Servis durumumuzu kontrol edin.",
+                footerUptimeBtn: "Servis Durumu"
             }
         };
 
